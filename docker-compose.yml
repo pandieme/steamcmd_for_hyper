@@ -1,0 +1,23 @@
+---
+name: hypers-game-server
+
+services:
+  zomboid:
+    container_name: zomboid
+    image: hyperx64/zomboid
+    build:
+      args:
+        STEAM_USER: anonymous
+        APP_ID: "380870"
+        GAME_PATH: /home/steam/Steam/steamapps/common/Project Zomboid Dedicated Server/
+      context: .
+    ports:
+      - 16261:16261/udp
+      - 16262:16262/udp
+    volumes:
+      - steamcmd_login_volume:/home/steam/Steam:rw
+      - steamcmd_volume:/home/steam/steamcmd:rw
+
+volumes:
+  steamcmd_login_volume: {}
+  steamcmd_volume: {}
